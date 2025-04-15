@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance
 const API = axios.create({
-  baseURL: '/api',
+  baseURL: process.env.REACT_APP_API_URL || 'https://api.bakerycrm.shop/api',
   headers: {
     'Content-Type': 'application/json',
   },

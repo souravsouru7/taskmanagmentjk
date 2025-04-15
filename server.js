@@ -18,14 +18,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Debug middleware to log all requests
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    console.log('Headers:', req.headers);
-    if (req.method !== 'GET') {
-        console.log('Body:', req.body);
-    }
-    next();
-});
+if (process.env.NODE_ENV === 'development') {
+    app.use((req, res, next) => {
+        console.log(`${req.method} ${req.url}`);
+        console.log('Headers:', req.headers);
+        if (req.method !== 'GET') {
+            console.log('Body:', req.body);
+        }
+        next();
+    });
+}
 
 // MongoDB Connection with debug logging
 console.log('Attempting MongoDB connection...');

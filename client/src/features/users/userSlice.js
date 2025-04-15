@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/users';
+const API_URL = 'https://www.bakerycrm.shop/api/users';
 
 // Create axios instance with auth header
 const axiosAuth = axios.create({
