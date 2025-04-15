@@ -13,7 +13,13 @@ const createAdmin = async () => {
       console.log('Set default JWT_SECRET for development');
     }
 
-    await mongoose.connect('mongodb://localhost:27017/tasksouru', {
+    // Check for MongoDB URI
+    if (!process.env.MONGODB_URI) {
+      console.error('Error: MONGODB_URI is not set in environment variables');
+      process.exit(1);
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -21,7 +27,7 @@ const createAdmin = async () => {
     // Generate new password hash
     const hashedPassword = await bcrypt.hash('admin123', 10);
 
-    const existingAdmin = await User.findOne({ email: 'admin@example.com' });
+    const existingAdmin = await User.findOne({ email: 'tam@gmail.com' });
     if (existingAdmin) {
       console.log('Admin user already exists');
       console.log('Updating admin user with correct permissions, role, and resetting password...');
